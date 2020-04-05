@@ -96,11 +96,11 @@ $\frac{\dot{Z}}{Z}=(1-\gamma)(\frac{\dot{K}}{K}-\frac{\dot{L}}{L})$ （7）
 
 ### 模型一
 
-#### 模型假设：
+#### 模型假设
 
 - 每次订货费用为$C_1$，每天每吨货物贮存费用为$C_2$(已知)
--  每天货物的需求量r吨为已知
--  订货周期为T天，每次订货Q吨，当贮存量降到0时订货立即到达。
+- 每天货物的需求量r吨为已知
+- 订货周期为T天，每次订货Q吨，当贮存量降到0时订货立即到达。
 
 #### 模型建立
 
@@ -125,9 +125,9 @@ $$
 进而：$Q=\sqrt{\frac{2C_1r}{C_2}}$
 此模型称为==经济订货批量公式==，简称EOQ公式
 
-### 模型二：允许缺货的存贮模型
+### 模型二 允许缺货的存贮模型
 
-#### 模型假设：
+#### 模型假设
 
 - 每次订货费用为$C_1$,每天每吨货物贮存费用$C_2$(已知)
 - 每天的货物需求量r吨（已知）
@@ -329,3 +329,48 @@ $\dot{x}=f_0(t)-kx$
   ![口服/肌肉注射函数图像](./image/2.9药物4.png)
 
 ## 2.10导弹跟踪
+
+### 背景
+
+在发射导弹时刻（t=0），导弹位于坐标原点(0,0)，飞机位于(a,b)，飞机研平行于x轴的方向以常速$v_0$飞行。导弹在时刻t的位置为点(x,y)，其速度为常值$v_1$，导弹在飞行过程中，按照制导系统时钟指向飞机。请确定导弹的飞行轨迹以及击中飞机所需的时间T。
+![导弹](./image/10导弹.png)
+
+### 模型建立与求解
+
+首先建立导弹的运动方程。导弹飞行曲线在点M(x,y)处的切线方程为：
+$Y-y=\frac{dy}{dx}(X-x)=\frac{\frac{dy}{dt}}{\frac{dx}{dt}}(X-x)$
+其中(x,y)为切线上动点的坐标。由于点$A(x_A,b)$应位于切线上，且$x_A=a+v_0t$,所以：
+$b-y=\frac{\frac{dy}{dt}}{\frac{dx}{dt}}(a+v_0t-x)$
+从而，导弹的飞行轨迹为：
+$$
+\small
+\begin{cases}
+  \frac{dx}{dt}(b-y)=\frac{dy}{dt}(a+v_0-x) （1）\\
+  (\frac{dx}{dt})^2+(\frac{dy}{dt})^2=v_1^2 （2）
+\end{cases}
+$$
+由（1）可得：$\frac{dx}{dy}(b-y)=a+v_0-x$
+两边对t求导，得：$\frac{d^2x}{d^2y}\frac{dy}{dt}(b-y)-\frac{dx}{dy}\frac{dy}{dt}=v_0-\frac{dx}{dt}$
+即：$\frac{d^2x}{d^2y}\frac{dy}{dt}(b-y)=v_0 （3）$
+由（2）得：$(\frac{dy}{dt})^2[1+(\frac{\frac{dx}{dt}}{\frac{dy}{dt}})^2]=v_1^2$
+即：$\frac{dy}{dt}=\frac{v_1}{[1+(\frac{dx}{dy})^2]^{\frac{1}{2}}}$
+代入（3）可得导弹得运动方程：
+$\frac{d^2x}{d^2y}(b-y)=\lambda[1+(\frac{dx}{dy})^2]^{\frac{1}{2}} （4）$
+其中，$\lambda=\frac{v_0}{v_1}$，
+又$x(0)=0,x(b)=a+v_0T$（在T时刻击中目标） （5）
+接下来求（4）满足（5）的解：
+设$p=\frac{dx}{dy}$，则$\frac{dp}{dy}=\frac{d^2x}{dy^2}$，
+（4）可化为：$\frac{dp}{dy}(b-y)=\lambda(1+p^2)^{\frac{1}{2}} （6）$
+$ln[p+(1+p^2)^{\frac{1}{2}}]=-\lambda ln(b-y)+c_1 （7）$
+（6）的初始条件为$p(0)=\frac{a}{b}$，令$c_1=ln(kb^{\lambda})$，则：
+$ln(p+\sqrt{1+p^2})=ln(b-y)^{-\lambda}+ln(kb^\lambda)=ln[\frac{kb^\lambda}{(b-y)^\lambda}]$
+$p+\sqrt{1+p^2}=\frac{kb^\lambda}{(b-y)^\lambda}$
+于时可以得到降阶方程：
+$\frac{dx}{dy}=\frac{1}{2}[\frac{kb^\lambda}{(b-y)^\lambda}-\frac{(b-y)^\lambda}{kb^\lambda}]$
+其通解为：
+$x=\frac{1}{2}[\frac{kb^\lambda}{(\lambda-1)(b-y)^{(\lambda-1)}}+\frac{(b-y)^{\lambda+1}}{(\lambda+1)kb^\lambda}]+c （8）$
+根据初始条件x(0)=0,可得：
+$c=b[(1+k^2)\lambda+k^2-1]/2k(1-\lambda^2)$
+所以导弹飞行轨迹方程为：$x=\frac{1}{2}[\frac{kb^\lambda}{(\lambda-1)(b-y)^{(\lambda-1)}}+\frac{(b-y)^{\lambda+1}}{(\lambda+1)kb^\lambda}]+b[(1+k^2)\lambda+k^2-1]/2k(1-\lambda^2)$
+又由$x(b)=a+v_0T$得到导弹集中目标的时间为：
+$T=\frac{c-a}{v_0}=\frac{\sqrt{a^2+b^2}-a\lambda}{v_1(1-\lambda^2)} （10）$
