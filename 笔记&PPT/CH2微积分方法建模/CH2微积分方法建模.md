@@ -374,3 +374,143 @@ $c=b[(1+k^2)\lambda+k^2-1]/2k(1-\lambda^2)$
 所以导弹飞行轨迹方程为：$x=\frac{1}{2}[\frac{kb^\lambda}{(\lambda-1)(b-y)^{(\lambda-1)}}+\frac{(b-y)^{\lambda+1}}{(\lambda+1)kb^\lambda}]+b[(1+k^2)\lambda+k^2-1]/2k(1-\lambda^2)$
 又由$x(b)=a+v_0T$得到导弹集中目标的时间为：
 $T=\frac{c-a}{v_0}=\frac{\sqrt{a^2+b^2}-a\lambda}{v_1(1-\lambda^2)} （10）$
+
+## 2.11食饵-捕食者系统
+
+一个包含两个群体的系统，其中一个群体紧密地依赖于另一个群体，成为食饵-捕食者系统。假设：x(t):t时刻食饵的数量；y(t):t时刻捕食者的数量。
+如果各自独立生活，则：
+$$
+\small
+\begin{cases}
+  \frac{dx}{dt}=\lambda x\\
+  \frac{dy}{dt}=-\mu y (\lambda,\mu>0)
+\end{cases}
+$$
+如今两者生活在一起，则有：
+$$
+\small
+\begin{cases}
+  \frac{dx}{dt}=(\lambda-\alpha y)x	（1）\\
+  \frac{dy}{dt}=-(\mu-\beta x)y	（2）(\alpha,\beta>0)
+\end{cases}
+$$
+上式称为Volterra-Lotka方程，初始条件为$x(0)=x_0,y(0)=y_0$(1)/(2)可得：
+$\frac{dy}{dx}=\frac{(\beta x-\mu)y}{(\lambda-\alpha y)x}$
+可得通解：
+$-\alpha y-\beta x+\lambda lny+\mu lnx=lnc$或$\frac{y^\lambda}{e^{\alpha y}}\frac{x^\mu}{e^{\beta x}}=c$
+将初始条件代入，可得特解，是xoy面上的一条闭轨线
+![食饵-捕食者](./image/食饵捕食者.png)
+当食饵较多时，捕食者增多因而食饵必定减少，使得捕食者也随之减少，从而食饵又会增多。==两者的数量如此起伏，周而复始，维持着生态平衡==。
+
+## 2.12传染病模型
+
+### 背景
+
+建立传染病模型的目的是描述传染过程、分析受感染人数的变化规律、预报高潮来到的时间。
+为了简单起见，假设传播期间内所观察地区人数N不变，不计生死迁移，时间以天为单位。
+
+### 模型一 SI模型
+
+#### 模型假设
+
+- 1.人群分为健康者和病人，在t时刻这两类人所占比例分别为s(t),i(t)，即s(t)+i(t)=1;
+- 2.平均每个病人每天接触人数是常数$\lambda$，即每个病人平均每天使得$\lambda s(t)$个健康者受感染变成病人，$\lambda$称为==日接触率==。
+
+#### 模型建立
+
+根据模型假设2，在T时刻，每个病人每天可以使得$\lambda s(t)$个健康者变成病人，病人人属为Ni(t)，故每天新增$\lambda Ns(t)i(t)$个患者，即：
+$N\frac{di}{dt}=\lambda Nsi$，假设t=0时患者比例$i_0$，可得模型：
+$$
+\small
+\begin{cases}
+  \frac{di}{dt}=\lambda i(1-i)   （1）\\
+  i(0)=i_0
+\end{cases}
+$$
+式（1）的解为：$i(t)=\frac{1}{1+(\frac{1}{t_0}e^{-\lambda t})}  （2）$
+![SI模型](./image/SI模型.png)
+
+#### 模型解释
+
+- 1.当$i=\frac{1}{2}$时，$\frac{di}{dt}$达到最大值，此时$t=t_m=\lambda^{-1}ln(\frac{1}{i_0}-1)$，也就是说，高潮到来时，$\lambda$越大，则$t_m$越小。
+- 2.当$t\rightarrow\infty$时，$i\rightarrow 1$此时所有的人都被感染，因为SI模型没有考虑治愈病人。
+
+### 模型二 SIS模型
+
+在SI模型的基础上引入治愈，对SI模型进行修正。
+
+#### 模型假设
+
+- 1.同SI模型假设1
+- 2.同SI模型假设2
+- 3.病人每天被治愈的占病人总数的比例为$\mu$，称作日治愈率。
+
+#### 模型修正
+
+SI模型可修正为，t时刻每天有$Ni\mu$的病人转变为健康。
+$$
+\small
+\begin{cases}
+  \frac{di}{dt}=\lambda i(1-i)-\mu i  （3）\\
+  i(0)=i_0
+\end{cases}
+$$
+（3）的解为：
+$$
+\small i(t)=
+\begin{cases}
+  [\frac{\lambda}{\lambda-\mu}+(\frac{1}{i_0}-\frac{\lambda}{\lambda-\mu})e^{-(\lambda-\mu)t}]^{-1},\lambda\not ={\mu}\\
+  (\lambda t+\frac{1}{i_0})^{-1},\lambda=\mu  （4）
+\end{cases}
+$$
+由（3）可以计算出使得$\frac{di}{dt}$达到最大值的高潮时刻$t_m$（$\frac{di}{dt}$的最大值$(\frac{di}{dt})_m$在$i=\frac{\lambda-\mu}{2\lambda}$时达到）
+记$a=\frac{\lambda}{\mu}$，可知：
+$$
+\small i(\infty)=
+\begin{cases}
+  1-\frac{1}{a},a>1\\
+  0,a\le 1
+\end{cases}
+$$
+![SIS模型](./image/SIS模型.png)
+
+### SIR模型
+
+#### 模型假设
+
+- 1.人群分为健康者、病人、移出者（病愈免疫者），三类人在t时刻在总人数N中占比例分别为s(t)、i(t)、r(t)，即s(t)+i(t)+r(t)=1
+- 2.病人日接触率为$\lambda$，日治愈率为$\mu$，传染期间接触数$\sigma=\frac{\lambda}{\mu}$
+
+#### 模型建立
+
+i(t)随t的变化规律同模型二，对于r(t)：
+$N\frac{dr}{dt}=\mu Ni,且\frac{ds}{dt}+\frac{di}{dt}+\frac{dr}{dt}=0$
+于时可得模型：
+$$
+\small
+\begin{cases}
+  \frac{ds}{dt}=-\lambda si\\
+  \frac{di}{dt}=\lambda si-\mu i  （5）\\
+  s(0)=s_0,i(0)=i_0
+\end{cases}
+$$
+从（5）中消去dt，结合$\sigma$的实际意义，可得：
+$$
+\small
+\begin{cases}
+  \frac{di}{ds}=\frac{1}{\sigma s}-1 （6）\\
+  i|_{s=s_0}=i_0
+\end{cases}
+$$
+（6）的解为：
+$i=(s_0+i_0)-s+\frac{1}{\sigma}ln\frac{s}{s_0} （7）$
+根据（5）（7）以及图像可分析s(t),i(t),r(t)的变化规律：
+- 1.无论$s_0,i_0$为多少，$i_\infty=0$，即病人终将消失。
+- 2.最终未被感染的健康者比例$s_\infty$时方程$s_0+i_0-s_\infty+\frac{1}{\sigma}ln\frac{s_\infty}{s_0}=0 （8）$在$(0,\frac{1}{\sigma})$内的单根。
+- 3.若$s_0>\frac{1}{\sigma}$，则当$s=\frac{1}{\sigma}$时，i(t)达到最大值$i_m=s_0+i_0-\frac{1}{\sigma}(1+ln\sigma s_0)$，i(t)先增后减至0.
+- 4.若$s_0\le\frac{1}{\sigma}$，则$i(t)\rightarrow0,s(t)\rightarrow s_\infty$。
+
+### 模型解释
+
+- 1.$\frac{1}{\sigma}$是一个阈值，当$s_0>\frac{1}{\sigma}$时传染病会蔓延，$s_0\le\frac{1}{\sigma}$时就不会蔓延
+- 2.$\sigma=\frac{\lambda}{\mu}$表示$\lambda$越小，$\mu$越大，$\sigma$也越小，从而越有利。
