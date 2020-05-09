@@ -316,3 +316,13 @@ $$
 
 主成分的系数向量$a_l=(a_{l1},a_{l2},...,a_{lm})$的分量$a_{lj}$刻画出第j个变量关于第l个主成分的重要性。
 可以证明：若$x=(x_1,x_2,...,x_m)^T$为m维随机向量，其样本相关矩阵$\hat{R}$的m个特征值为$\lambda_1\geq\lambda_2\geq...\geq\lambda_m\geq0$，相应的标准正交化的特征向量为$\mu_1,\mu_2,...,\mu_m$，则$x=(x_1,x_2,...,x_m)^T$的第i个主成分为$y_i=\mu_i^Tx(i=1,2,...,m)$。
+称$\frac{\lambda_i}{\sum_{j=1}^{m}\lambda_j}$为主成分$y_i=\mu_i^T(i=1,2,...,m)$的**贡献率**，$\frac{\sum_{j=1}^{k}\lambda_j}{\sum_{j=1}^{m}\lambda_j}$为主成分$y_1,y_2,...,y_k$的**累计贡献率**，表达了前k个主成分中包含原变量$x_1,x_2,...,x_m$的信息量大小，通常取k使累计贡献率大于85%即可。
+
+### 计算步骤
+
+1.由已知的原始数据矩阵$X_{n\times m}$计算样本均值向量$\hat{\mu}=\overline{x}=(\overline{x}_1,\overline{x}_2,...,\overline{x}_m)^T$，其中$\overline{x}_i=\frac{1}{n}\sum_{j=1}^{n}x_{ij}(i=1,2,...,m)$
+2.将原始数据标准化，即$\tilde{x}_{ij}=\frac{x_{ij}-\overline{x}_j}{\sqrt{\sigma_{jj}}}$，这里的$\sigma_{jj}=\frac{1}{n-1}s_{jj}$，其中$s_{ij}=\sum_{l=1}^{n}(x_{li}-\overline{x}_i)(x_{lj}-\overline{x}_j)(i,j=1,2,...,m)$
+3.记$\tilde{X}_{n\times m}=(\tilde{x}_{ij})$，形成样本相关矩阵$\hat{R}=\tilde{X}^T\tilde{X}$
+4.求$\tilde{R}$的特征根$\lambda_1\geq\lambda_2\geq...\geq\lambda_m\geq0$及相关的标准正交化的特征向量$\mu_1,\mu_2,...,\mu_m$，可得主成分为$y_i=\mu_i^Tx(i=1,2,...,m)$
+
+主成分分析本身往往并不是最终目的，而只是达到某种目的的一种手段。很多情况下，**主成分分析只是作为对原问题进行统计分析的中间步骤，目的是利用主成分变量代替原变量作进一步的统计分析，达到减少变量个数的效果**。例如，利用主成分变量作回归分析、判别分析、聚类分析等等。
