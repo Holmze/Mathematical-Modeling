@@ -1,7 +1,7 @@
 # Mathematical modeling notes
 
 ### How to read:
-Because github's markdown does not support latex syntax, I recommend using VScode to read:
+Github's markdown does not support latex syntax, recommend to use VScode to read:
 
 - clone this repositroes:
     >git clone https://github.com/Holmze/Mathematical-Modeling.git
