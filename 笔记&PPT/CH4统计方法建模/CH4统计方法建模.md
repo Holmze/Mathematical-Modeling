@@ -366,16 +366,7 @@ $$
     v_{ij}
 \end{pmatrix}
 $$
-$$
-\hat{R}=
-\begin{pmatrix}
-    R_{11}&R_{12}\\
-    R_{21}&R_{22}\\
-\end{pmatrix}=
-\begin{pmatrix}
-    r_{ij}
-\end{pmatrix}
-$$
+
 其中，$r_{ij}=\frac{v_{ij}}{\sqrt{v_{ii}}v_{jj}},(i,j=1,2,...,p+q)$
 3.计算$A=R_{11}^{-1}R_{12}R_{22}^{-1}R_{21}$的所有非零特征值，记为$\lambda_1^2\geq\lambda_2^2\geq...\geq\lambda_k^2>0$
 4.计算$A=R_{11}^{-1}R_{12}R_{22}^{-1}R_{21}$的相应于$\lambda_i^2$的标准化特征向量$\mu_i$,并按下式求出$v_i$:
