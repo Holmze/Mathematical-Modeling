@@ -20,7 +20,14 @@ $F=\frac{\frac{S_A}{r-1}}{\frac{S_e}{n-r}}$~$F(r-1,n-r)$
 上式中，
 $S_A=\sum_{i=1}^{r}\sum_{j=1}^{n_i}(\overline{x_i}-\overline{x})^2=\sum_{i=1}^{r}(\overline{x_i}-\overline{x})^2$，称为组间差平方和。
 $S_e=\sum_{i=1}^{r}\sum_{j=1}^{n_i}(x_{ij}-\overline{x_i})^2$，称为组内差平方和。
-其中，$n=\sum_{i=1}^{r}n_i,\\\overline{x_i}=\frac{1}{n}\sum_{j=1}^{n_i}x_{ij},\\\overline{x}=\frac{1}{n}\sum_{i=1}^{r}\sum_{j=1}^{n_i}x_{ij}$
+其中，
+$$
+\begin{cases}
+    n=\sum_{i=1}^{r}n_i,\\
+    \overline{x_i}=\frac{1}{n}\sum_{j=1}^{n_i}x_{ij},\\
+    \overline{x}=\frac{1}{n}\sum_{i=1}^{r}\sum_{j=1}^{n_i}x_{ij}
+\end{cases}
+$$
 对于给定的显著性水平$\alpha(\alpha=0.0 or 0.05)$，如果$F>F_\alpha(r-1,n-r)$，则拒绝$H_0$，即认为A对实验指标有显著影响。
 在实际计算时，可以先对原始数据做如下处理：
 $x_{ij}'=\frac{x_{ij}-a}{b}$，不会影响F值的大小。
