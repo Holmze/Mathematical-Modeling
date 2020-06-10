@@ -39,3 +39,55 @@ $\frac{q}{r}[1-(1+r)^{N+1-M}]=[(1+r)^N-1]\frac{p}{r}(1+r)-q$
 
 ## 5.2商品销售量预测
 
+利用往年的商品销量预测下一年各个季度的商品销量
+在利用常系数线性差分方程：
+$y_t=a_1y_{t-1}+a_2$
+或$y_t=a_1y_{t-1}+a_2y_{t-2}+a_3$
+建模研究实际问题，常常需要根据统计数据用最小二乘法来拟合差分方程的系数
+
+**差分方程中的系数不一定能使所有统计数据吻合**，较为合理的办法使用最小二乘法求一组总体上较为吻合的数据。
+以二阶差分方程$y_t=a_1y_{t-1}+a_2y_{t-2}+a_3$为例，假设有五组数据。对于已知观测数据$y_t(t=1,2,...,5)$，选取合适的$a_1,a_2,a_3$使得
+$Q=\sum\limits_{t=3}^{5}[y_t-(a_1y_{t-1}+a_2y_{t-2}+a_3)]^2$达到最小值。
+$$
+\begin{cases}
+    \frac{\partial Q}{\partial a_1}=2\sum\limits_{t=3}^{5}[(a_1y_{t-1}+a_2y_{t-2}+a_3)-y_t]y_{t-1}=0\\
+    \frac{\partial Q}{\partial a_2}=2\sum\limits_{t=3}^{5}[(a_1y_{t-1}+a_2y_{t-2}+a_3)-y_t]y_{t-2}=0\\
+    \frac{\partial Q}{\partial a_3}=2\sum\limits_{t=3}^{5}[(a_1y_{t-1}+a_2y_{t-2}+a_3)-y_t]=0
+\end{cases}
+$$
+$$
+\begin{cases}
+    (\sum\limits_{t=3}^{5}y_{t-1}^2)a_1+(\sum\limits_{t=3}^{5}y_{t-1}y_{t-2})a_2+(\sum\limits_{t=3}^{5}y_{t-1})a_3=\sum\limits_{t=3}^{5}y_ty_{t-1}\\
+    (\sum\limits_{t=3}^{5}y_{t-1}y_{t-2})a_1+(\sum\limits_{t=3}^{5}y_{t-2}^2)a_2+(\sum\limits_{t=3}^{5}y_{t-2})a_3=\sum\limits_{t=3}^{5}y_ty_{t-2}\\
+    (\sum\limits_{t=3}^{5}y_{t-1})a_1+(\sum\limits_{t=3}^{5}y_{t-2})a_2+(\sum\limits_{t=3}^{5}1)a_3=\sum\limits_{t=3}^{5}y_t
+\end{cases}
+$$
+得到下面的线性方程组
+$$
+\begin{pmatrix}
+    y_2&y_3&y_4\\
+    y_1&y_2&y_3\\
+    1&1&1
+\end{pmatrix}
+\begin{pmatrix}
+    y_2&y_1&1\\
+    y_3&y_2&1\\
+    y_4&y_3&1
+\end{pmatrix}
+\begin{pmatrix}
+    a_1\\
+    a_2\\
+    a_3
+\end{pmatrix}
+=\begin{pmatrix}
+    y_2&y_3&y_4\\
+    y_1&y_2&y_3\\
+    1&1&1
+\end{pmatrix}
+\begin{pmatrix}
+    y_3\\
+    y_4\\
+    y_5
+\end{pmatrix}
+$$
+上述为预测各年第一季度销售量而建立的二阶差分方程，虽然其系数与前5年第一季度的统计数据完全吻合，但用于预测时预测值与事实不符。稍作分析，不难看出，**如分别对每一季度建立一个差分方程，则根据统计数据拟合出的系数可能会相差甚大**，但==对同一种商品，这种差异应当是微小的==，故应根据统计数据建立一个共用于各个季度的差分方程。
